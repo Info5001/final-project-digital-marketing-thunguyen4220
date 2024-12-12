@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import model.ProductManagement.ProductCatalog;
 import model.ProductManagement.ProductSummary;
 import model.ProductManagement.ProductsReport;
+import model.ProductManagement.Product;
 
 /**
  *

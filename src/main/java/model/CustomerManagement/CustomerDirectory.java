@@ -21,10 +21,8 @@ public class CustomerDirectory {
     ArrayList<CustomerProfile> customerlist;
 
     public CustomerDirectory(Business b) {
-
         business = b;
         customerlist = new ArrayList<CustomerProfile>();
-
     }
 
     public CustomerProfile newCustomerProfile(Person p) {

@@ -5,10 +5,18 @@
  */
 package model.MarketModel;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author kal bugrara
  */
 public class Channel {
+    String name; 
+    // ArrayList<MarketChannelAssignment> marketChannelCombinations; 
 
+    public Channel(String name) {
+        this.name = name;
+        // marketChannelCombinations = new ArrayList<MarketChannelAssignment>();
+    }
 }

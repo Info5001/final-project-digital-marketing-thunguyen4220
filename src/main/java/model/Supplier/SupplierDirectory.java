@@ -15,7 +15,6 @@ import model.Business.Business;
  * @author kal bugrara
  */
 public class SupplierDirectory {
-
     Business business;
     ArrayList<Supplier> suppliers;
 
@@ -32,7 +31,6 @@ public class SupplierDirectory {
     }
 
     public Supplier findSupplier(String id) {
-
         for (Supplier supplier : suppliers) {
 
             if (supplier.getName().equals(id))

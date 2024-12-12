@@ -11,6 +11,7 @@ import com.github.javafaker.Faker;
 
 import model.Business.Business;
 import model.Business.ConfigureABusiness;
+import model.MarketModel.MarketCatalog;
 
 /**
  *
@@ -78,9 +79,9 @@ public class DigitalMarketingApplication {
      * 4. Add any additional features you think will improve user experience
      */
 
-    Business business = ConfigureABusiness.createABusinessAndLoadALotOfData("Amazon", 50, 10, 30,
-        100,
-        10);
+    Business business = ConfigureABusiness.createABusinessAndLoadALotOfData("Amazon", 100, 30, 30, 100, 100);
 
+    business.printShortInfo();
+    business.getMasterOrderList().generateMasterOrderReport().printOrderReport();
   }
 }

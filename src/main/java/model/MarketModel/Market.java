@@ -6,7 +6,6 @@
 package model.MarketModel;
 
 import java.util.ArrayList;
-
 import model.ProductManagement.SolutionOffer;
 
 /**
@@ -14,8 +13,8 @@ import model.ProductManagement.SolutionOffer;
  * @author kal bugrara
  */
 public class Market {
-  ArrayList<SolutionOffer> so;
-  ArrayList<MarketChannelAssignment> channels;
+  ArrayList<SolutionOffer> solutionOffers;
+  ArrayList<MarketChannelAssignment> marketChannelCombs;
   ArrayList<String> characteristics;
   ArrayList<Market> submarkets;
   int size;
@@ -23,5 +22,23 @@ public class Market {
   public Market(String s) {
     characteristics = new ArrayList<String>();
     characteristics.add(s);
+  }
+
+  public MarketChannelAssignment getMarketChannelComb(Channel c) {
+    for (MarketChannelAssignment mca : marketChannelCombs) {
+      if (mca.getChannel().equals(c))
+        return mca;
+    }
+    MarketChannelAssignment newMca = new MarketChannelAssignment(this, c);
+    marketChannelCombs.add(newMca);
+    return newMca;
+  }
+
+  public void addSolutionOffer(SolutionOffer so) {
+    solutionOffers.add(so);
+  }
+
+  public ArrayList<SolutionOffer> getSolutionOffers() {
+    return solutionOffers;
   }
 }

@@ -21,55 +21,58 @@ import model.SalesManagement.SalesPersonDirectory;
 import model.Supplier.Supplier;
 import model.Supplier.SupplierDirectory;
 import model.UserAccountManagement.UserAccountDirectory;
+import model.MarketModel.MarketChannelAssignment;
 
 /**
  *
  * @author kal bugrara
  */
 public class Business {
-
     String name;
-    PersonDirectory persondirectory;
-    MasterOrderList masterorderlist;
+    PersonDirectory personDirectory;
+    MasterOrderList masterOrderList;
     SupplierDirectory suppliers;
-    MarketCatalog marketcatalog;
-    ChannelCatalog channelcatalog;
-    SolutionOfferCatalog solutionoffercatalog;
-    CustomerDirectory customerdirectory;
-    EmployeeDirectory employeedirectory;
-    SalesPersonDirectory salespersondirectory;
-    UserAccountDirectory useraccountdirectory;
-    MarketingPersonDirectory marketingpersondirectory;
+    MarketCatalog marketCatalog;
+    ChannelCatalog channelCatalog;
+    SolutionOfferCatalog solutionOfferCatalog;
+    CustomerDirectory customerDirectory;
+    EmployeeDirectory employeeDirectory;
+    SalesPersonDirectory salesPersonDirectory;
+    UserAccountDirectory userAccountDirectory;
+    MarketingPersonDirectory marketingPersonDirectory;
+    ArrayList<MarketChannelAssignment> marketChannelAssignments;
 
     public Business(String n) {
         name = n;
-        masterorderlist = new MasterOrderList();
+        masterOrderList = new MasterOrderList();
         suppliers = new SupplierDirectory(this);
-        // solutionoffercatalog = new SolutionOfferCatalog();
-        persondirectory = new PersonDirectory();
-        customerdirectory = new CustomerDirectory(this);
-        salespersondirectory = new SalesPersonDirectory(this);
-        useraccountdirectory = new UserAccountDirectory();
-        marketingpersondirectory = new MarketingPersonDirectory(this);
-        employeedirectory = new EmployeeDirectory(this);
-
+        solutionOfferCatalog = new SolutionOfferCatalog(this);
+        personDirectory = new PersonDirectory();
+        customerDirectory = new CustomerDirectory(this);
+        salesPersonDirectory = new SalesPersonDirectory(this);
+        userAccountDirectory = new UserAccountDirectory();
+        marketingPersonDirectory = new MarketingPersonDirectory(this);
+        employeeDirectory = new EmployeeDirectory(this);
+        marketCatalog = new MarketCatalog(this);
+        channelCatalog = new ChannelCatalog();
+        marketChannelAssignments = new ArrayList<MarketChannelAssignment>();
     }
 
     public int getSalesVolume() {
-        return masterorderlist.getSalesVolume();
+        return masterOrderList.getSalesVolume();
 
     }
 
     public PersonDirectory getPersonDirectory() {
-        return persondirectory;
+        return personDirectory;
     }
 
     public UserAccountDirectory getUserAccountDirectory() {
-        return useraccountdirectory;
+        return userAccountDirectory;
     }
 
     public MarketingPersonDirectory getMarketingPersonDirectory() {
-        return marketingpersondirectory;
+        return marketingPersonDirectory;
     }
 
     public SupplierDirectory getSupplierDirectory() {
@@ -86,7 +89,6 @@ public class Business {
     }
 
     public ArrayList<ProductSummary> getSupplierProductsAlwaysAboveTarget(String n) {
-
         ProductsReport productsreport = getSupplierPerformanceReport(n);
         return productsreport.getProductsAlwaysAboveTarget();
 
@@ -99,26 +101,45 @@ public class Business {
     }
 
     public CustomerDirectory getCustomerDirectory() {
-        return customerdirectory;
+        return customerDirectory;
     }
 
     public SalesPersonDirectory getSalesPersonDirectory() {
-        return salespersondirectory;
+        return salesPersonDirectory;
     }
 
     public MasterOrderList getMasterOrderList() {
-        return masterorderlist;
+        return masterOrderList;
     }
 
     public EmployeeDirectory getEmployeeDirectory() {
-        return employeedirectory;
+        return employeeDirectory;
+    }
+
+    public MarketCatalog getMarketCatalog() {
+        return marketCatalog;
+    }
+
+    public ChannelCatalog getChannelCatalog() {
+        return channelCatalog;
+    }
+
+    public SolutionOfferCatalog getSolutionOfferCatalog() {
+        return solutionOfferCatalog;
+    }
+
+    public void addMarketChannelAssignment(MarketChannelAssignment mca) {
+        marketChannelAssignments.add(mca);
+    }
+
+    public ArrayList<MarketChannelAssignment> getMarketChannelAssignments() {
+        return marketChannelAssignments;
     }
 
     public void printShortInfo() {
         System.out.println("Checking what's inside the business hierarchy.");
         suppliers.printShortInfo();
-        customerdirectory.printShortInfo();
-        masterorderlist.printShortInfo();
+        customerDirectory.printShortInfo();
+        masterOrderList.printShortInfo();
     }
-
 }

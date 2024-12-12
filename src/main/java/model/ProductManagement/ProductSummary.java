@@ -14,11 +14,8 @@ package model.ProductManagement;
 public class ProductSummary {
     int rank; // will be done later
     Product subjectProduct;
-
-    int salesVolume;
-
+    float salesVolume;
     float averagePrice;
-
     int salesQuantity;
     int numberofsalesabovetarget;
     int numberofsalesbelowtarget;
@@ -53,7 +50,7 @@ public class ProductSummary {
         return subjectProduct;
     }
 
-    public int getSalesVolume() {
+    public float getSalesVolume() {
         return salesVolume;
     }
 

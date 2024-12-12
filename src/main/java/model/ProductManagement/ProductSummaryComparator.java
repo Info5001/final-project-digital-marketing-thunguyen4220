@@ -20,7 +20,7 @@ public class ProductSummaryComparator implements Comparator<ProductSummary> {
             return (-1) * Float.compare(o1.getAveragePrice(), o2.getAveragePrice());
         }
 
-        return (-1) * Integer.compare(o1.getSalesVolume(), o2.getSalesVolume());
+        return (-1) * Double.compare(o1.getSalesVolume(), o2.getSalesVolume());
     }
 
 }
