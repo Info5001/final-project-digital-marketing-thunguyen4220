@@ -58,7 +58,38 @@ public class ProductSummary {
         return averagePrice;
     }
 
-    public void printProductSummary() {
+    public void printProductSummaryByMarket() {
+        var salesQuantity = subjectProduct.getSalesVolumeListByMarket();
+        var adCosts = subjectProduct.getAdBudgetListByMarket();
+
+        System.out.println(String.format("Product %s Summary", subjectProduct.getName()));
+        salesQuantity.forEach((k, v) -> {
+            var adCost = adCosts.get(k);
+            var profit = v - adCost;
+
+            System.out.println(String.format("MARKET %s", k.getName()));
+            System.out.println(String.format("- Revenues: %d", v));
+            System.out.println(String.format("- Advertsing cost: %d", adCost));
+            System.out.println(String.format("- Profit: %d", profit));
+        });
+        // System.out.println(subjectproduct.getName() + " | " + acutalsalesvolume + " |
+        // " + numberofsalesabovetarget + " | " + productpriceperformance);
+    }
+
+    public void printProductSummaryByChannel() {
+        var salesQuantity = subjectProduct.getSalesVolumeListByChannel();
+        var adCosts = subjectProduct.getAdBudgetListByChannel();
+
+        System.out.println(String.format("Product %s Summary", subjectProduct.getName()));
+        salesQuantity.forEach((channel, ravenues) -> {
+            var adCost = adCosts.get(channel);
+            var profit = ravenues - adCost;
+
+            System.out.println(String.format("CHANNEL %s", channel.getName()));
+            System.out.println(String.format("- Revenues: %d", ravenues));
+            System.out.println(String.format("- Advertsing cost: %d", adCost));
+            System.out.println(String.format("- Profit: %d", profit));
+        });
         // System.out.println(subjectproduct.getName() + " | " + acutalsalesvolume + " |
         // " + numberofsalesabovetarget + " | " + productpriceperformance);
     }

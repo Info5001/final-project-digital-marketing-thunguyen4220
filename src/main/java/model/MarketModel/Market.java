@@ -17,11 +17,12 @@ public class Market {
   ArrayList<MarketChannelAssignment> marketChannelCombs;
   ArrayList<String> characteristics;
   ArrayList<Market> submarkets;
+  String name;
   int size;
 
-  public Market(String s) {
+  public Market(String name) {
     characteristics = new ArrayList<String>();
-    characteristics.add(s);
+    this.name = name;
   }
 
   public MarketChannelAssignment getMarketChannelComb(Channel c) {
@@ -40,5 +41,9 @@ public class Market {
 
   public ArrayList<SolutionOffer> getSolutionOffers() {
     return solutionOffers;
+  }
+
+  public String getName() {
+    return name;
   }
 }

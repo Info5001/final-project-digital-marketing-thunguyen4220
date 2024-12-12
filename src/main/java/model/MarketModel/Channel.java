@@ -19,4 +19,8 @@ public class Channel {
         this.name = name;
         // marketChannelCombinations = new ArrayList<MarketChannelAssignment>();
     }
+
+    public String getName() {
+        return name;
+    }
 }

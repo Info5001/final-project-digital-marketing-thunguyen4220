@@ -6,6 +6,8 @@
 package model.Business;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import model.CustomerManagement.CustomerDirectory;
 import model.MarketModel.ChannelCatalog;
@@ -22,6 +24,8 @@ import model.Supplier.Supplier;
 import model.Supplier.SupplierDirectory;
 import model.UserAccountManagement.UserAccountDirectory;
 import model.MarketModel.MarketChannelAssignment;
+import model.MarketModel.Channel;
+import model.MarketModel.Market;
 
 /**
  *
@@ -142,4 +146,44 @@ public class Business {
         customerDirectory.printShortInfo();
         masterOrderList.printShortInfo();
     }
+
+    /* public void advertisingEfficiency() {
+        this.getMarketCatalog().getMarketList().forEach(market -> {
+            System.out.println("Market: " + market.getName());
+            this.channelCatalog.getChannelList().forEach(channel -> {
+                System.out.println("Channel: " + channel.getName());
+                Integer total = 0;
+                for (MarketChannelAssignment mca : this.marketChannelAssignments) {
+                    if (mca.getMarket().equals(market) && mca.getChannel().equals(channel)) {
+                        total += (int) mca.getTotalAdvertisingBudgetShare();
+                    }
+                }
+
+                System.out.println("Ads cost: " + total);
+            });
+        });
+    } */ 
+
+ public void advertisingEfficiency() {
+    List<Channel> channels = this.channelCatalog.getChannelList();
+    System.out.print(String.format("%-20s", "Market"));
+    channels.forEach(channel -> System.out.print(String.format("%-20s", channel.getName())));
+    System.out.println(); 
+
+    this.getMarketCatalog().getMarketList().forEach(market -> {
+        System.out.print(String.format("%-20s", market.getName()));
+
+        channels.forEach(channel -> {
+            int total = 0;
+            for (MarketChannelAssignment mca : this.marketChannelAssignments) {
+                if (mca.getMarket().equals(market) && mca.getChannel().equals(channel)) {
+                    total += (int) mca.getTotalAdvertisingBudgetShare();
+                }
+            }
+            System.out.print(String.format("%-20d", total));
+        });
+
+        System.out.println(); 
+    });
+}
 }

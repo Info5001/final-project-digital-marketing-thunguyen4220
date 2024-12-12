@@ -176,6 +176,10 @@ public class ConfigureABusiness {
         MarketChannelAssignment ass = new MarketChannelAssignment(
             marketCatalog.getMarketList().get(i),
             channelCatalog.getChannelList().get(j));
+
+        int adsBudget = getRandom(1, 300_000);
+        ass.setAdvertisingBudget(adsBudget);
+
         marketChannelAssignments.add(ass);
       }
     }

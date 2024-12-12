@@ -55,11 +55,26 @@ public class MarketChannelAssignment {
 
   }
 
-  public int getAdvertisingBudgetShare(SolutionOffer so) {
+  public float getAdvertisingBudgetShare(SolutionOffer so) {
     // for each solution offer, its share in byudget would be sales * budget / total
     // sales
     if (!bundles.contains(so))
       return 0;
-    return so.getSalesVolume() * advertisingBudget / this.getSalesVolume();
+    var sales = (float) so.getSalesVolume();
+    var total = (float) this.getSalesVolume();
+    var result = sales * advertisingBudget / total;
+    return result;
+  }
+
+  public float getTotalAdvertisingBudgetShare() {
+    float result = 0;
+
+    for (SolutionOffer so : bundles) {
+      var sales = (float) so.getSalesVolume();
+      var total = (float) this.getSalesVolume();
+      result += sales * advertisingBudget / total;
+    }
+
+    return result;
   }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.MarketModel.Market;
+import model.MarketModel.Channel;
 import model.OrderManagement.OrderItem;
 
 /**
@@ -72,18 +73,32 @@ public class Product {
         return total;
     }
 
-    public HashMap<Market, Integer> getAdBudgetList() {
+    public HashMap<Market, Integer> getAdBudgetListByMarket() {
         HashMap<Market, Integer> resultsbyMarket = new HashMap<Market, Integer>();
         for (SolutionOffer so : bundles) {
             Market m = so.getMarket();
             if (resultsbyMarket.get(m) != null) {
-                resultsbyMarket.replace(m, resultsbyMarket.get(m) + so.getAdsBudgetShare(this));
+                resultsbyMarket.replace(m, resultsbyMarket.get(m) + (int) so.getAdsBudgetShare(this));
             } else {
-                resultsbyMarket.put(m, so.getAdsBudgetShare(this));
+                resultsbyMarket.put(m, (int) so.getAdsBudgetShare(this));
             }
         }
 
         return resultsbyMarket;
+    }
+
+    public HashMap<Channel, Integer> getAdBudgetListByChannel() {
+        HashMap<Channel, Integer> resultsbyChannel = new HashMap<Channel, Integer>();
+        for (SolutionOffer so : bundles) {
+            Channel m = so.getChannel();
+            if (resultsbyChannel.get(m) != null) {
+                resultsbyChannel.replace(m, resultsbyChannel.get(m) + (int) so.getAdsBudgetShare(this));
+            } else {
+                resultsbyChannel.put(m, (int) so.getAdsBudgetShare(this));
+            }
+        }
+
+        return resultsbyChannel;
     }
 
     public float getSalesVolume() {
@@ -108,7 +123,10 @@ public class Product {
         return resultsbyMarket;
     }
 
-    public HashMap<Market, Integer> getSalesVolumeList() {
+    /**
+     * Returns the sales ravenues for each market
+     */
+    public HashMap<Market, Integer> getSalesVolumeListByMarket() {
         HashMap<Market, Integer> resultsbyMarket = new HashMap<Market, Integer>();
         for (SolutionOffer so : bundles) {
             Market m = so.getMarket();
@@ -120,6 +138,26 @@ public class Product {
         }
 
         return resultsbyMarket;
+    }
+
+    /**
+     * Returns the sales ravenues for each channel
+     */
+    public HashMap<Channel, Integer> getSalesVolumeListByChannel() {
+        HashMap<Channel, Integer> resultsbyChannel = new HashMap<Channel, Integer>();
+        for (SolutionOffer so : bundles) {
+            if (so.getSalesShare(this) == 0) {
+                continue;
+            }
+            Channel m = so.getChannel();
+            if (resultsbyChannel.get(m) != null) {
+                resultsbyChannel.replace(m, resultsbyChannel.get(m) + so.getSalesShare(this));
+            } else {
+                resultsbyChannel.put(m, so.getSalesShare(this));
+            }
+        }
+
+        return resultsbyChannel;
     }
 
     // Number of item sales above target
@@ -172,11 +210,11 @@ public class Product {
 
     public int getTotalQuantity() {
         int totalQuantity = 0;
-        /*
-         * for (OrderItem oi : orderItems) {
-         * totalQuantity = totalQuantity + oi.getQuantity();
-         * }
-         */
+
+        // for (OrderItem oi : orderItems) {
+        //     totalQuantity = totalQuantity + oi.getQuantity();
+        // }
+
         return totalQuantity;
     }
 

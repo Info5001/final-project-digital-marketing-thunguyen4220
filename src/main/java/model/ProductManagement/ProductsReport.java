@@ -56,14 +56,26 @@ public class ProductsReport {
         return productsAlwaysAboveTarget;
     }
 
-    public void printProductReport() {
-        System.out.println("Product Performance Report");
-        System.out.println("Below are product name, actual sales and number of sales above target.");
+    public void printMarketProfitabilityReport() {
+        System.out.println("===================================================");
+        System.out.println("Markets Performance Report");
+        //System.out.println("Below are product name, actual sales and number of sales above target.");
         for (ProductSummary ps : productSummaryList) {
-            int index = productSummaryList.indexOf(ps);
-            System.out.print((index + 1) + " ");
-            ps.printProductSummary();
+            if (ps.getSalesVolume() == 0.0) {
+                continue;
+            }
+            ps.printProductSummaryByMarket();
         }
+    }
 
+    public void printChannelProfitabilityReport() {
+        System.out.println("------------------------");
+        System.out.println("Channels Profit Report");
+        for (ProductSummary ps : productSummaryList) {
+            if (ps.getSalesVolume() == 0.0) {
+                continue;
+            }
+            ps.printProductSummaryByChannel();
+        }
     }
 }
