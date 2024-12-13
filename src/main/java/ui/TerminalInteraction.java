@@ -35,12 +35,12 @@ public class TerminalInteraction {
         ArrayList<Market> markets = business.getMarketCatalog().getMarketList();
         ArrayList<Channel> channels = business.getChannelCatalog().getChannelList();
 
-        // Common
+        
         List<Map<String, Integer>> fullAdsList = new ArrayList<>();
         int sumCost = 0;
         int buyChoice = 0;
 
-        // Select Profile (Market or Channel)
+    
         System.out.println("1. Select based on market");
         System.out.println("2. Select based on channel");
         System.out.println("3. Exit");
@@ -58,13 +58,13 @@ public class TerminalInteraction {
                 Market selectedMarket = markets.get(marketChoice - 1);
                 System.out.println("Profile selected: Market - " + selectedMarket.getName() + "\n");
 
-                // View advertisements
+                
                 business.getSupplierDirectory().getSupplierList().forEach(supplier -> {
                     ProductsReport productsReport = supplier.getProductCatalog().generateProductPerformanceReport("Price");  
                     List<Map<String, Integer>> adsList = productsReport.getAdsByMarketList(selectedMarket);
 
                     adsList.forEach(ad -> {
-                        fullAdsList.add(ad);  // Append to the existing list
+                        fullAdsList.add(ad);  
                     });
                 });
                 
@@ -119,14 +119,14 @@ public class TerminalInteraction {
                 scanner.nextLine();
                 Channel selectedChannel = channels.get(channelChoice - 1);
                 System.out.println("Profile selected: Channel - " + selectedChannel.getName());
-                // View advertisements
+          
                 System.out.println("Displaying advertisement based on selected profile...\n");
                 business.getSupplierDirectory().getSupplierList().forEach(supplier -> {
                     ProductsReport productsReport = supplier.getProductCatalog().generateProductPerformanceReport("Price");
                     List<Map<String, Integer>> adsList = productsReport.getAdsByChannelList(selectedChannel);
 
                     adsList.forEach(ad -> {
-                        fullAdsList.add(ad);  // Append to the existing list
+                        fullAdsList.add(ad);  
                     });
                 });
                 
@@ -183,35 +183,8 @@ public class TerminalInteraction {
                 return;
         }   
 
-        // View solution offers
-        
-        // Checkout
 
         System.out.println("Exiting the application. Goodbye!");
     }
 
-
-    public static void viewSolutionOffers(Business business) {
-        System.out.println("Available Solution Offers:");
-        ArrayList<SolutionOffer> offers = business.getSolutionOfferCatalog().getSolutionOfferList();
-        for (int i = 0; i < offers.size(); i++) {
-            SolutionOffer offer = offers.get(i);
-            System.out.println((i + 1) + ". " + offer.getProduct().getName() + " - $" + offer.getTargetPrice());
-        }
-        // Logic to add offers to cart
-    }
-
-    public static void checkout() {
-        System.out.println("Completing purchase...");
-        // Logic to complete purchase and confirm order
-    }
-
-    // Assuming these methods are defined elsewhere
-    static void loadMarketChannelAssignments(Business b) {
-        // Implementation here...
-    }
-
-    static void loadSolutionOffers(Business b) {
-        // Implementation here...
-    }
 }
