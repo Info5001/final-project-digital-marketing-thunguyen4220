@@ -5,6 +5,13 @@
  */
 package model.ProductManagement;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import model.MarketModel.Channel;
+import model.MarketModel.Market;
+
 /**
  *
  * @author kal bugrara
@@ -58,7 +65,7 @@ public class ProductSummary {
         return averagePrice;
     }
 
-    public void printProductSummaryByMarket() {
+   /*  public void printProductSummaryByMarket() {
         var salesQuantity = subjectProduct.getSalesVolumeListByMarket();
         var adCosts = subjectProduct.getAdBudgetListByMarket();
 
@@ -73,10 +80,10 @@ public class ProductSummary {
             System.out.println(String.format("- Profit: %d", profit));
         });
         // System.out.println(subjectproduct.getName() + " | " + acutalsalesvolume + " |
-        // " + numberofsalesabovetarget + " | " + productpriceperformance);
-    }
-
-    public void printProductSummaryByChannel() {
+        // " + numberofsalesabovetarget + " | " + productpriceperformance); 
+    } */ 
+        ///////////////////////////////////////////////////////////////////// 
+    /* public void printProductSummaryByChannel() {
         var salesQuantity = subjectProduct.getSalesVolumeListByChannel();
         var adCosts = subjectProduct.getAdBudgetListByChannel();
 
@@ -92,6 +99,69 @@ public class ProductSummary {
         });
         // System.out.println(subjectproduct.getName() + " | " + acutalsalesvolume + " |
         // " + numberofsalesabovetarget + " | " + productpriceperformance);
+    } */ 
+
+    public void printProductSummaryByMarket() {
+        var salesQuantity = subjectProduct.getSalesVolumeListByMarket();
+        var adCosts = subjectProduct.getAdBudgetListByMarket();
+    
+        System.out.println(String.format("Product %s Summary", subjectProduct.getName()));
+        System.out.println("MARKET           | REVENUES      | ADVERTISING COST | PROFIT");
+    
+        salesQuantity.forEach((market, revenues) -> {
+            var adCost = adCosts.get(market);
+            var profit = revenues - adCost;
+    
+            System.out.println(String.format("%-17s | %-13d | %-17d | %d", 
+                                             market.getName(), revenues, adCost, profit));
+        });
+    } 
+    
+
+    public void printProductSummaryByChannel() {
+        var salesQuantity = subjectProduct.getSalesVolumeListByChannel();
+        var adCosts = subjectProduct.getAdBudgetListByChannel();
+    
+        System.out.println(String.format("Product %s Summary", subjectProduct.getName()));
+        System.out.println("CHANNEL           | REVENUES      | ADVERTISING COST    | PROFIT    ");
+    
+        salesQuantity.forEach((channel, revenues) -> {
+            var adCost = adCosts.get(channel);
+            var profit = revenues - adCost;
+    
+            System.out.println(String.format("%-17s | %-13d | %-17d | %d", 
+                                             channel.getName(), revenues, adCost, profit));
+        });
+    } 
+
+    public int printAdsProductByMarket(Market market, String productName) {
+        var salesQuantity = subjectProduct.getSalesVolumeListByMarket();
+        var adCosts = subjectProduct.getAdBudgetListByMarket();
+
+        final int[] adFinalCost = {0};
+
+        salesQuantity.forEach((markets, revenues) -> {
+            var adCost = adCosts.get(market);
+            if (markets == market)
+                adFinalCost[0] = adCost;
+        });
+
+        return adFinalCost[0];
+    }
+
+    public int printAdsProductByChannel(Channel channel, String productName) {
+        var salesQuantity = subjectProduct.getSalesVolumeListByChannel();
+        var adCosts = subjectProduct.getAdBudgetListByChannel();
+
+        final int[] adFinalCost = {0};
+
+        salesQuantity.forEach((channels, revenues) -> {
+            var adCost = adCosts.get(channel);
+            if (channels == channel)
+                adFinalCost[0] = adCost;
+        });
+
+        return adFinalCost[0];
     }
 
 }

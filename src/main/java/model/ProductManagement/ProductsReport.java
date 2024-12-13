@@ -7,6 +7,12 @@ package model.ProductManagement;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import model.MarketModel.Channel;
+import model.MarketModel.Market;
 
 /**
  *
@@ -57,7 +63,7 @@ public class ProductsReport {
     }
 
     public void printMarketProfitabilityReport() {
-        System.out.println("===================================================");
+        System.out.println("------------------------");
         System.out.println("Markets Performance Report");
         //System.out.println("Below are product name, actual sales and number of sales above target.");
         for (ProductSummary ps : productSummaryList) {
@@ -77,5 +83,47 @@ public class ProductsReport {
             }
             ps.printProductSummaryByChannel();
         }
+    }
+
+    public List<Map<String, Integer>> getAdsByMarketList(Market market) {
+        List<Map<String, Integer>> listAdsByMarket = new ArrayList<>();
+
+        for (ProductSummary ps : productSummaryList) {
+            if (ps.getSalesVolume() == 0.0) {
+                continue;
+            }
+
+            int cost = ps.printAdsProductByMarket(market, ps.subjectProduct.getName());
+
+            if (cost != 0) {
+                Map<String, Integer> adMap = new HashMap<>();
+                adMap.put(ps.subjectProduct.getName(), cost);
+
+                listAdsByMarket.add(adMap);
+            }
+        }
+
+        return listAdsByMarket;
+    }
+
+    public List<Map<String, Integer>> getAdsByChannelList(Channel channel) {
+        List<Map<String, Integer>> listAdsByChannel = new ArrayList<>();
+
+        for (ProductSummary ps : productSummaryList) {
+            if (ps.getSalesVolume() == 0.0) {
+                continue;
+            }
+            
+            int cost = ps.printAdsProductByChannel(channel, ps.subjectProduct.getName());
+
+            if (cost != 0) {
+                Map<String, Integer> adMap = new HashMap<>();
+                adMap.put(ps.subjectProduct.getName(), cost);
+
+                listAdsByChannel.add(adMap);
+            }
+        }
+
+        return listAdsByChannel;
     }
 }

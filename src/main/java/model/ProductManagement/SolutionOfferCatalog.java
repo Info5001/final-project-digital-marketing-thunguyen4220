@@ -45,4 +45,8 @@ public class SolutionOfferCatalog {
     public void add(SolutionOffer so){
         solutionOffers.add(so);
     }
+
+    public ArrayList<SolutionOffer> getSolutionOfferList() {
+        throw new UnsupportedOperationException("Unimplemented method 'getSolutionOfferList'");
+    }
 }

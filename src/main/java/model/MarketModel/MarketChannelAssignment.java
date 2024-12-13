@@ -77,4 +77,9 @@ public class MarketChannelAssignment {
 
     return result;
   }
+
+  public ArrayList<SolutionOffer> getSolutionOffers() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getSolutionOffers'");
+  }
 }

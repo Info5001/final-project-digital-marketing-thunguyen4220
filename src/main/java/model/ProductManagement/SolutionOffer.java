@@ -113,4 +113,9 @@ public class SolutionOffer {
                 : productSaleRate * marketChannelComb.getAdvertisingBudgetShare(this);
         return result;
     }
+
+    public Market getProduct() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getProduct'");
+    }
 }

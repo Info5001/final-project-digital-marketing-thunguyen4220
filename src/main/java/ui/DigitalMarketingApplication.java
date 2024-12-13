@@ -86,14 +86,12 @@ public class DigitalMarketingApplication {
     //business.getMasterOrderList().generateMasterOrderReport().printOrderReport();
 
     business.getSupplierDirectory().getSupplierList().forEach(supplier -> {
-      //System.out.println("===================================================");
-      //System.out.println("Supplier: " + supplier.getName());
-      ProductsReport productsReport = supplier.getProductCatalog().generateProductPerformanceReport("Price");
-      
-      // productsReport.printMarketProfitabilityReport();
-      // productsReport.printChannelProfitabilityReport();
+      ProductsReport productsReport = supplier.getProductCatalog().generateProductPerformanceReport("Price");  
+      /*                        Part 2 */ 
+      productsReport.printMarketProfitabilityReport();
+     //productsReport.printChannelProfitabilityReport();
     });
 
-    business.advertisingEfficiency();
+    //business.advertisingEfficiency();
   }
 }

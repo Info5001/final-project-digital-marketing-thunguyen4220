@@ -18,6 +18,7 @@ import model.Personnel.EmployeeDirectory;
 import model.Personnel.PersonDirectory;
 import model.ProductManagement.ProductSummary;
 import model.ProductManagement.ProductsReport;
+import model.ProductManagement.SolutionOffer;
 import model.ProductManagement.SolutionOfferCatalog;
 import model.SalesManagement.SalesPersonDirectory;
 import model.Supplier.Supplier;
@@ -186,4 +187,5 @@ public class Business {
         System.out.println(); 
     });
 }
+
 }
